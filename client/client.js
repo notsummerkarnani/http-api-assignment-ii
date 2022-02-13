@@ -25,10 +25,12 @@ const handleResponse = async(response) => {
             break;
     }
 
-    //Parse the response to json. This works because we know the server always
-    //sends back json. Await because .json() is an async function.
-    let obj = await response.json();
+    let obj = await response.text();
 
+    //check if its just a head and end the function
+    if (!obj) return;
+
+    obj = JSON.parse(obj);
     console.log(obj);
     //If we have a message, display it.
     if (obj.message) {
@@ -86,7 +88,6 @@ const getPost = async(userForm) => {
         },
     });
 
-    //Once we have a response, handle it.
     handleResponse(response);
 }
 
