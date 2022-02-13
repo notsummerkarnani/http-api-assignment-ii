@@ -12,7 +12,8 @@
         "pretest": "eslint ./src --fix",
         "nodemon": "nodemon -e js,html,css --watch ./src --watch ./hosted ./src/server.js",
         "build": "webpack",
-        "test": "echo \"Tests complete\""
+        "test": "echo \"Tests complete\"",
+        "heroku-postbuild": "webpack -p"
     },
     "repository": {
         "type": "git",
