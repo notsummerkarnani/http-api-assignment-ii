@@ -12,7 +12,10 @@
         "pretest": "eslint ./src --fix",
         "nodemon": "nodemon -e js,html,css --watch ./src --watch ./hosted ./src/server.js",
         "build": "webpack",
-        "test": "echo \"Tests complete\""
+        "test": "echo \"Tests complete\"",
+        "heroku-prebuild": "echo This runs before Heroku installs dependencies.",
+        "heroku-postbuild": "echo This runs after Heroku installs dependencies, but before Heroku prunes and caches dependencies.",
+        "heroku-cleanup": "echo This runs after Heroku prunes and caches dependencies."
     },
     "repository": {
         "type": "git",
