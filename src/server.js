@@ -78,7 +78,6 @@ const onRequest = (request, response) => {
     const params = querystring.parse(parsedUrl.query);
 
     if (parsedUrl.pathname === '/addUser') {
-        console.log(`line 87 - ${urlStruct[request.method][parsedUrl.pathname]}`);
         parseBody(request, response, jsonHandler.addUser);
     } else if (urlStruct[request.method][parsedUrl.pathname]) {
         urlStruct[request.method][parsedUrl.pathname](request, response, params);

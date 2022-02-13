@@ -1,22 +1,25 @@
 const users = {};
 
-const respondJSON = (request, response, status, object = null) => {
+const respondJSON = (request, response, status, object) => {
     response.writeHead(status, { 'Content-Type': 'application/json' });
 
-    // check if only Head is called
-    if (object !== null) response.write(JSON.stringify(object));
+    response.write(JSON.stringify(object));
+
+    response.end();
+};
+
+const respondJSONHead = (request, response, status) => {
+    response.writeHead(status, { 'Content-Type': 'application/json' });
 
     response.end();
 };
 
 const getUsers = (request, response) => {
-    const responseJSON = {
-        users,
-    };
+    const responseJSON = { users };
     return respondJSON(request, response, 200, responseJSON);
 };
 
-const getUsersHead = (request, response) => respondJSON(request, response, 200);
+const getUsersHead = (request, response) => respondJSONHead(request, response, 200);
 
 const notReal = (request, response) => {
     const responseJSON = {
@@ -26,7 +29,7 @@ const notReal = (request, response) => {
     return respondJSON(request, response, 404, responseJSON);
 };
 
-const notRealHead = (request, response) => respondJSON(request, response, 404);
+const notRealHead = (request, response) => respondJSONHead(request, response, 404);
 
 const addUser = (request, response, params) => {
 
@@ -57,12 +60,12 @@ const addUser = (request, response, params) => {
 
     // sends the response for if it was created
     if (status === 201) {
-        responseJSON.message = 'Created Successfully';
+        responseJSON.message = 'Created Successfuly!';
         return respondJSON(request, response, status, responseJSON);
     }
 
     // not created, so it must be updated, sends no data just a head
-    return respondJSON(request, response, status);
+    return respondJSONHead(request, response, status);
 };
 
 module.exports = {

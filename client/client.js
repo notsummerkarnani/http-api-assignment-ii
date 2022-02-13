@@ -17,6 +17,9 @@ const handleResponse = async(response) => {
         case 400: //bad request
             content.innerHTML = `<b>Bad Request</b>`;
             break;
+        case 404: //Not Found
+            content.innerHTML = `<b>Not Found</b>`;
+            break;
         default: //any other status code
             content.innerHTML = `Error code not implemented by client.`;
             break;
@@ -26,9 +29,13 @@ const handleResponse = async(response) => {
     //sends back json. Await because .json() is an async function.
     let obj = await response.json();
 
+    console.log(obj);
     //If we have a message, display it.
     if (obj.message) {
-        content.innerHTML += `<p>${obj.message}</p>`;
+        content.innerHTML += `<p>Message: ${obj.message}</p>`;
+    }
+    if (obj.users) {
+        content.innerHTML += `<p>${JSON.stringify(obj.users)}</p>`
     }
 };
 
@@ -64,8 +71,8 @@ const sendPost = async(nameForm) => {
 
 const getPost = async(userForm) => {
     //Grab all the info from the form
-    const urlField = nameForm.querySelector('#urlField');
-    const methodField = nameForm.querySelector('#methodSelect');
+    const urlField = userForm.querySelector('#urlField');
+    const methodField = document.querySelector('#methodSelect');
 
     //Make a fetch request and await a response. Set the method to
     //the one provided by the form (POST). Set the headers. Content-Type
