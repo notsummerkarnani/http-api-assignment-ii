@@ -62,6 +62,27 @@ const sendPost = async(nameForm) => {
     handleResponse(response);
 };
 
+const getPost = async(userForm) => {
+    //Grab all the info from the form
+    const urlField = nameForm.querySelector('#urlField');
+    const methodField = nameForm.querySelector('#methodSelect');
+
+    //Make a fetch request and await a response. Set the method to
+    //the one provided by the form (POST). Set the headers. Content-Type
+    //is the type of data we are sending. Accept is the data we would like
+    //in response. Then add our FORM-URLENCODED string as the body of the request.
+    let response = await fetch(urlField.value, {
+        method: methodField.value,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json',
+        },
+    });
+
+    //Once we have a response, handle it.
+    handleResponse(response);
+}
+
 const init = () => {
     //Grab the form
     const nameForm = document.querySelector('#nameForm');
@@ -77,11 +98,13 @@ const init = () => {
 
     const getUser = (e) => {
         e.preventDefault();
+        getPost(userForm)
+        return false;
     }
 
     //Call addUser when the submit event fires on the form.
     nameForm.addEventListener('submit', addUser);
-    userForm.addEventListener('submit', )
+    userForm.addEventListener('submit', getUser);
 };
 
 //When the window loads, run init.

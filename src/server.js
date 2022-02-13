@@ -68,6 +68,7 @@ const parseBody = (request, response, handler) => {
 
         // Once we have the bodyParams object, we will call the handler function. We then
         // proceed much like we would with a GET request.
+
         handler(request, response, bodyParams);
     });
 };
@@ -76,8 +77,9 @@ const onRequest = (request, response) => {
     const parsedUrl = url.parse(request.url);
     const params = querystring.parse(parsedUrl.query);
 
-    if (urlStruct[request.method][parsedUrl.pathname] === '/addUser') {
-        parseBody(request, response, urlStruct[request.method][parsedUrl.pathname]);
+    if (parsedUrl.pathname === '/addUser') {
+        console.log(`line 87 - ${urlStruct[request.method][parsedUrl.pathname]}`);
+        parseBody(request, response, jsonHandler.addUser);
     } else if (urlStruct[request.method][parsedUrl.pathname]) {
         urlStruct[request.method][parsedUrl.pathname](request, response, params);
     } else {
