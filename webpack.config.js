@@ -5,7 +5,6 @@ module.exports = {
     mode: 'production',
     output: {
         path: path.resolve(__dirname, 'hosted'),
-        publicPath: '/',
         filename: 'bundle.js',
     },
     watch: true,

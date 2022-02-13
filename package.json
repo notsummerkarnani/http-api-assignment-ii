@@ -12,7 +12,6 @@
         "pretest": "eslint ./src --fix",
         "nodemon": "nodemon -e js,html,css --watch ./src --watch ./hosted ./src/server.js",
         "build": "webpack",
-        "postinstall": "npm run build",
         "test": "echo \"Tests complete\""
     },
     "repository": {
